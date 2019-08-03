@@ -1,6 +1,6 @@
 import Foundation
 
-class Loader{
+struct JSONLoader {
 public func load<T: Decodable>(_ filename: String, as type:T.Type = T.self) -> T {
     let data:Data
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
