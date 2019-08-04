@@ -2,14 +2,16 @@ import XCTest
 @testable import JSONLoader
 
 final class JSONLoaderTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        
+    struct Person: Codable {
+       var id:Int
+       var name:String
+    }
+    
+    func testLoadingJSON() {
+     
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testLoadingJSON", testLoadingJSON),
     ]
 }
