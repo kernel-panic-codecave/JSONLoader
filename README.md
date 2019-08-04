@@ -26,8 +26,8 @@ struct Person: Codable {
    var name:String
 }
 ```
-Now you all you need to do to populate a array of these is call the load method:
+Now you all you need to do to populate a array of these is call the load method (After importing JSONLoader):
 
 ```
-var people:[Person] = JSONLoader.load("people")
+var people:[Person] = load("people")
 ```
