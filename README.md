@@ -1,6 +1,6 @@
 # JSONLoader
 
-A simple library to quickly load JSON from your local bundle to a `Codable` object.
+A simple Swift library to quickly load JSON from your local bundle to a `Codable` object.
 
 ## How to use
 Simply define your `struct` as `Codable` and then when you need to map your JSON file to that object just call the `load` function.
@@ -31,3 +31,6 @@ Now you all you need to do to populate a array of these is call the load method 
 ```
 var people:[Person] = load("people")
 ```
+
+## Installation
+To install, add a package dependency to this repo in Xcode.
