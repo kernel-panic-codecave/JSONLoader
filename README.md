@@ -1,4 +1,5 @@
 # JSONLoader
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A simple Swift library to quickly load JSON from your local bundle to a `Codable` object.
 
