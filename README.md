@@ -18,9 +18,9 @@ Say you had a JSON file named `people.json` like this:
     "name": "John"
   }
 ]
-```swift
-Now you need a data model like so:
 ```
+Now you need a data model like so:
+```swift
 struct Person: Codable {
    var id:Int
    var name:String
