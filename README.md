@@ -7,7 +7,7 @@ Simply define your `struct` as `Codable` and then when you need to map your JSON
 
 ## Example
 Say you had a JSON file named `people.json` like this:
-``` 
+```json
 [
   {
     "id": 1,
@@ -18,7 +18,7 @@ Say you had a JSON file named `people.json` like this:
     "name": "John"
   }
 ]
-```
+```swift
 Now you need a data model like so:
 ```
 struct Person: Codable {
@@ -28,7 +28,7 @@ struct Person: Codable {
 ```
 Now you all you need to do to populate a array of these is call the load method (After importing JSONLoader):
 
-```
+```swift
 var people:[Person] = load("people")
 ```
 
