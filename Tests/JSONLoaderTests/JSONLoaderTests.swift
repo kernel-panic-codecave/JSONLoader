@@ -2,16 +2,29 @@ import XCTest
 @testable import JSONLoader
 
 final class JSONLoaderTests: XCTestCase {
-    struct Person: Codable {
-       var id:Int
-       var name:String
+    struct HelloWorld: Codable, Equatable {
+        var hello: String
     }
     
-    func testLoadingJSON() {
-     
+    func testParse() {
+        let json = "{ \"hello\": \"world\" }"
+        XCTAssertEqual(
+            parse(json.data(using: .utf8)!),
+            HelloWorld(hello: "world")
+        )
     }
-
+    
+    func testLoadFromURL() {
+        let url = URL(string: "https://pastebin.com/raw/SQJvQS5i")!
+        XCTAssertEqual(
+            loadFromURL(url),
+            HelloWorld(hello: "world")
+        )
+        
+    }
+    
     static var allTests = [
-        ("testLoadingJSON", testLoadingJSON),
+        ("testParse", testParse),
+        ("testLoadFromURL", testLoadFromURL),
     ]
 }

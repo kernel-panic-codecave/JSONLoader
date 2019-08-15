@@ -4,7 +4,7 @@
 A simple Swift library to quickly load JSON from your local bundle to a `Codable` object.
 
 ## How to use
-Simply define your `struct` as `Codable` and then when you need to map your JSON file to that object just call the `load` function.
+Simply define your `struct` as `Codable` and then when you need to map your JSON file to that object just call the `loadFromBundle` function. If you want to fetch JSON then parse it, you can call `loadFromURL`.
 
 ## Example
 Say you had a JSON file named `people.json` like this:
@@ -23,19 +23,15 @@ Say you had a JSON file named `people.json` like this:
 Now you need a data model like so:
 ```swift
 struct Person: Codable {
-   var id:Int
-   var name:String
+   var id: Int
+   var name: String
 }
 ```
 Now you all you need to do to populate a array of these is call the load method (After importing JSONLoader):
 
 ```swift
-var people:[Person] = load("people")
+var people: [Person] = loadFromBundle("people")
 ```
-
-
 
 # Installation
 To install, add a package dependency to this repo in Xcode.
-
-
