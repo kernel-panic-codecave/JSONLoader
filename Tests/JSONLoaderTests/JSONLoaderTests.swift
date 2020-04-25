@@ -9,7 +9,7 @@ final class JSONLoaderTests: XCTestCase {
     func testParse() {
         let json = "{ \"hello\": \"world\" }"
         XCTAssertEqual(
-            parse(json.data(using: .utf8)!),
+            try parse(json.data(using: .utf8)!),
             HelloWorld(hello: "world")
         )
     }
@@ -17,7 +17,7 @@ final class JSONLoaderTests: XCTestCase {
     func testLoadFromURL() {
         let url = URL(string: "https://pastebin.com/raw/SQJvQS5i")!
         XCTAssertEqual(
-            loadFromURL(url),
+            try loadFromURL(url),
             HelloWorld(hello: "world")
         )
         
