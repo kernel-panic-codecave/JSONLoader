@@ -1,35 +1,57 @@
 import Foundation
 
-public func loadFromBundle<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
+public func loadFromBundle<T: Decodable>(_ filename: String, as type: T.Type = T.self) throws -> T {
     let data: Data
     
     guard let file = Bundle.main.url(forResource: filename, withExtension: "json") else {
-        fatalError("Couldn't find \(filename) in main bundle.")
+        throw ParsingError.fileNotFound
     }
 
     do {
         data = try Data(contentsOf: file)
-        return parse(data, as: T.self)
+        return try parse(data, as: T.self)
     } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+        throw ParsingError.unableToLoadFile
     }
 }
 
 
-public func loadFromURL<T: Decodable>(_ url: URL, as type: T.Type = T.self) -> T {
+public func loadFromURL<T: Decodable>(_ url: URL, as type: T.Type = T.self) throws -> T {
     do {
         let contents = try String(contentsOf: url)
-        return parse(contents.data(using: .utf8)!, as: T.self)
+        return try parse(contents.data(using: .utf8)!, as: T.self)
     } catch {
-        fatalError("Couldn't load data from \(url):\n\(error)")
+        throw ParsingError.unableToLoadFile
     }
 }
 
-public func parse<T: Decodable>(_ data: Data, as type: T.Type = T.self) -> T {
+public func parse<T: Decodable>(_ data: Data, as type: T.Type = T.self) throws -> T {
     do {
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: data)
     } catch {
-        fatalError("Couldn't parse data:\n\(error)")
+        throw ParsingError.unableToParseData
+    }
+}
+
+
+/// PARSING ERROR CUSTOM MESSAGES
+
+enum ParsingError: Error {
+    case unableToParseData
+    case unableToLoadFile
+    case fileNotFound
+}
+
+extension ParsingError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .unableToLoadFile:
+            return "Unable to load file"
+        case .fileNotFound:
+            return "Unable to find file or folder"
+        case .unableToParseData:
+            return "Unable to parse data. Please check JSON data"
+        }
     }
 }
