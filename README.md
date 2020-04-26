@@ -30,7 +30,12 @@ struct Person: Codable {
 Now you all you need to do to populate a array of these is call the load method (After importing JSONLoader):
 
 ```swift
-var people: [Person] = loadFromBundle("people")
+do {
+    var people: [Person] = try loadFromBundle("people")
+} catch let err {
+    //Alert
+    print(err.localizedDescription)
+}
 ```
 
 # Installation
